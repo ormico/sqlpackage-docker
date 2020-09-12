@@ -10,7 +10,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      version: $(date +%s)
+      versionX: $(date +%s)
+      version: latest
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
