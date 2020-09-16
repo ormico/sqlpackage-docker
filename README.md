@@ -4,6 +4,9 @@
 
 This Docker image contains sqlpackage and is designed for when you want to run SqlPackage without installing it locally.
 
+# Not Working
+This is not working. I've worked through a lot of issues but I'm currently stuck. I cannot get SqlPackage to run in any linux environment. I will push up my latest changes and notes.
+
 # Docker Hub
 
 [ormico/sqlpackage](https://hub.docker.com/r/ormico/sqlpackage)
