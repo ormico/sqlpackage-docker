@@ -3,12 +3,12 @@ LABEL maintainer="Zack Moore https://github.com/ormico/"
 USER root
 VOLUME download
 RUN apt-get update \
-    && apt-get upgrade \
+    && apt-get upgrade -y \
     && apt-get install -y \
         unzip \
         msodbcsql17 \
         mssql-tools
-RUN wget -progress=bar:force -q -O sqlpackage.zip https://go.microsoft.com/fwlink/?linkid=2134311 \
+RUN wget -O sqlpackage.zip https://go.microsoft.com/fwlink/?linkid=2134311 \
     && unzip sqlpackage.zip -d /opt/sqlpackage \
     && chmod +x /opt/sqlpackage/sqlpackage \
     && rm /sqlpackage.zip
