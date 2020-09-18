@@ -1,24 +1,16 @@
-FROM ubuntu:20.04
+FROM mcr.microsoft.com/mssql/server:2019-latest
+LABEL maintainer="Zack Moore https://github.com/ormico/"
 USER root
-
+VOLUME download
 RUN apt-get update \
     && apt-get upgrade \
     && apt-get install -y \
-        curl \
         unzip \
-        libunwind8 \
-        libicu55 \
-#        libssl10 \
-        software-properties-common \
-    && add-apt-repository 'deb http://security.ubuntu.com/ubuntu xenial-security main' \
-    && apt-get install -y libssl.so.1.0.0 \
-#    && add-apt-repository universe \
-    && curl -Lq https://go.microsoft.com/fwlink/?linkid=2134311 -o sqlpackage-linux-x64-latest.zip \    
-    && unzip sqlpackage-linux-x64-latest.zip -d /opt/sqlpackage \
-    && chmod a+x /opt/sqlpackage/sqlpackage
-#     \
-#    && /bin/bash -c "source /root/.bashrc"
-RUN echo 'export PATH="$PATH:/opt/sqlpackage"' >> ~/.bashrc
-RUN /bin/bash -c "source ~/.bashrc"
-
-#ENV PATH="$PATH:/opt/sqlpackage"
+        msodbcsql17 \
+        mssql-tools
+RUN wget -progress=bar:force -q -O sqlpackage.zip https://go.microsoft.com/fwlink/?linkid=2134311 \
+    && unzip sqlpackage.zip -d /opt/sqlpackage \
+    && chmod +x /opt/sqlpackage/sqlpackage \
+    && rm /sqlpackage.zip
+USER mssql
+ENV PATH=$PATH:/opt/mssql-tools/bin:/opt/sqlpackage
