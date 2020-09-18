@@ -4,7 +4,12 @@
 
 This Docker image contains sqlpackage and is designed for when you want to run SqlPackage without installing it locally.
 
+<<<<<<< HEAD
 This image also contains `sqlcmd`. This makes this image very useful for running basic SQL Server tasks.
+=======
+# Not Working
+This is not working. I've worked through a lot of issues but I'm currently stuck. I cannot get SqlPackage to run in any linux environment. I will push up my latest changes and notes.
+>>>>>>> master
 
 # Docker Hub
 
