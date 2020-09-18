@@ -14,7 +14,7 @@ This image is updated regularly on Docker Hub to contain the latest changes from
 
 # How to use
 
-Examples are i Powershell but can be easily converted to bash.
+Examples are in Powershell but can be easily converted to bash.
 
 ## SqlPackage
 The following example downloads a bacpac of database exampledb1 to a folder named download.
@@ -34,4 +34,3 @@ docker container run -ti --rm -v ${path}:/download ormico/sqlpackage sqlpackage 
 # Additional Resources
 * [https://github.com/microsoft/mssql-docker](https://github.com/microsoft/mssql-docker)
 * [Linux Microsoft ODBC Driver for SQL Server](https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver15#ubuntu17)
-* 
