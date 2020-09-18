@@ -30,3 +30,8 @@ docker container run -ti --rm -v ${path}:/download ormico/sqlpackage sqlpackage 
 # Known Issues
 
 * Base image is the MS SQL Server 2019 image. I don't use SQL Server but it was the only base image I could find that would successfully run SqlPackage. This does cause a message to print with SQL Server information when the container starts. A future version may remove SQL Server by changing the base image again.
+
+# Additional Resources
+* [https://github.com/microsoft/mssql-docker](https://github.com/microsoft/mssql-docker)
+* [Linux Microsoft ODBC Driver for SQL Server](https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver15#ubuntu17)
+* 

@@ -1,0 +1,46 @@
+FROM ubuntu:20.04
+LABEL maintainer="Zack Moore https://github.com/ormico/"
+USER root
+
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
+        curl \
+        apt-transport-https \
+        debconf-utils \
+        unzip \
+        libunwind8 \
+        gnupg2 \
+        software-properties-common \
+    && rm -rf /var/lib/apt/lists/*
+# https://docs.microsoft.com/en-us/sql/tools/sqlpackage-download?view=sql-server-ver15
+RUN curl -Lq https://go.microsoft.com/fwlink/?linkid=2134311 -o sqlpackage-linux-x64-latest.zip \
+    && unzip sqlpackage-linux-x64-latest.zip -d /opt/sqlpackage \
+    && chmod a+x /opt/sqlpackage/sqlpackage
+
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+RUN curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
+
+# https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver15#ubuntu17
+RUN apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql17 mssql-tools unixodbc-dev
+####
+RUN apt-get -y install locales
+RUN locale-gen en_US.UTF-8
+RUN update-locale LANG=en_US.UTF-8
+#####
+RUN add-apt-repository universe
+RUN add-apt-repository 'deb http://security.ubuntu.com/ubuntu xenial-security main' 
+RUN apt-get update -y && apt-get install -y libssl1.0.0
+# cultures
+#todo: this didn't succeed
+#RUN apk add --no-cache icu-libs
+#RUN apt-get install -y icu-libs
+
+#todo: don't know if this helps any
+#ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+#####
+RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin:/opt/sqlpackage"' >> ~/.bash_profile
+RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin:/opt/sqlpackage"' >> ~/.bashrc
+RUN /bin/bash -c "source ~/.bashrc"
+ENV PATH="$PATH:/opt/mssql-tools/bin:/opt/sqlpackage"
+# replace runtimeconfig.json file to work around Globalization problem
+COPY ./sqlpackage.runtimeconfig.json /opt/sqlpackage/
+CMD /bin/bash 
