@@ -12,6 +12,10 @@ This image also contains `sqlcmd`. This makes this image very useful for running
 
 This image is updated regularly on Docker Hub to contain the latest changes from SqlPackage and the base image.
 
+# GitHub 
+
+[https://github.com/ormico/sqlpackage-docker](https://github.com/ormico/sqlpackage-docker)
+
 # How to use
 
 Examples are in Powershell but can be easily converted to bash.
