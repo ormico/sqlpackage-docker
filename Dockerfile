@@ -2,9 +2,9 @@ FROM mcr.microsoft.com/mssql/server:2019-latest
 LABEL maintainer="Zack Moore https://github.com/ormico/"
 USER root
 VOLUME download
-RUN ACCEPT_EULA=Y apt-get update \
+RUN apt-get update \
     && apt-get upgrade -y \
-    && apt-get install -y \
+    && ACCEPT_EULA=Y apt-get install -y \
         unzip \
         msodbcsql17 \
         mssql-tools
