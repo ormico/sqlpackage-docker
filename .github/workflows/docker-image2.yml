@@ -1,0 +1,22 @@
+name: Docker Image CI2
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      versionX: $(date +%s)
+      version: latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      #run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file Dockerfile --tag ormico/sqlpackage:$version
