@@ -11,12 +11,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      #versionX: $(date +%s)
+      versionX: {{ $(date -u +%Y%m%d%H%M%S) }}
       version: latest
     steps:
     - uses: actions/checkout@v2
-    - name: versionX
-      run: versionX=$(date -u +%Y%m%d%H%M%S)
     - name: echo
       run: echo $versionX
     - name: Build the Docker image
