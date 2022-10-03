@@ -11,18 +11,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      versionX: $(date +%s)
+      #versionX: $(date +%s)
       version: latest
     steps:
     - uses: actions/checkout@v2
+    - name: echo
+      run: versionX=$(date -u +%Y%m%d%H%M%S)
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ormico/sqlpackage:$version
+      run: docker build . --file Dockerfile --tag ormico/sqlpackage:$versionX
+    - name: Tag the Docker image
+      run: docker tag ormico/sqlpackage:$versionX ormico/sqlpackage:$version
     - name: Login to DockerHub
       uses: docker/login-action@v1
       with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: echo
-      run: echo $versionX
+    - name: push the Docker image
+      run: docker push ormico/sqlpackage:$versionX
     - name: push the Docker image
       run: docker push ormico/sqlpackage:$version
