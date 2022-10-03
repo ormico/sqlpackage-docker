@@ -15,8 +15,10 @@ jobs:
       version: latest
     steps:
     - uses: actions/checkout@v2
-    - name: echo
+    - name: versionX
       run: versionX=$(date -u +%Y%m%d%H%M%S)
+    - name: echo
+      run: echo $versionX
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag ormico/sqlpackage:$versionX
     - name: Tag the Docker image
