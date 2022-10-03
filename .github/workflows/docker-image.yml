@@ -22,5 +22,7 @@ jobs:
       with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: echo
+      run: echo $versionX
     - name: push the Docker image
       run: docker push ormico/sqlpackage:$version
