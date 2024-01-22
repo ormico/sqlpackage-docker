@@ -1,8 +1,7 @@
 name: Docker Image CI
 
 on:
-  workflow_dispatch:
-    
+  workflow_dispatch:    
   push:
     branches: [ master ]
   pull_request:
@@ -16,19 +15,14 @@ jobs:
       versionX: $(date -u +%Y%m%d%H%M%S)
       version: latest
     steps:
-    - uses: actions/checkout@v2
-    - name: echo
-      run: echo $versionX
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ormico/sqlpackage:$versionX
-    - name: Tag the Docker image
-      run: docker tag ormico/sqlpackage:$versionX ormico/sqlpackage:$version
-    - name: Login to DockerHub
-      uses: docker/login-action@v1
-      with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: push the Docker image
-      run: docker push ormico/sqlpackage:$versionX
-    - name: push the Docker image
-      run: docker push ormico/sqlpackage:$version
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ormico/sqlpackage:${{ github.sha }}
+            ormico/sqlpackage:$(date -u +'%Y%m%d%H%M%S')
