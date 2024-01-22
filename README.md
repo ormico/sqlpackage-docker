@@ -1,5 +1,5 @@
 # SqlPackage in a Docker image
-![Docker Image CI](https://github.com/ormico/sqlpackage-docker/workflows/Docker%20Image%20CI/badge.svg)
+[![Docker Image CI](https://github.com/ormico/sqlpackage-docker/actions/workflows/docker-image.yml/badge.svg)](https://github.com/ormico/sqlpackage-docker/actions/workflows/docker-image.yml)
 
 [SqlPackage](https://docs.microsoft.com/en-us/sql/tools/sqlpackage?view=sql-server-ver15) is a Microsoft tool for importing and exporting bacpac and dacpac files from SQL Server.
 
