@@ -13,7 +13,7 @@ RUN wget -O sqlpackage.zip https://aka.ms/sqlpackage-linux \
     && unzip sqlpackage.zip -d /opt/sqlpackage \
     && chmod +x /opt/sqlpackage/sqlpackage \
     && rm /sqlpackage.zip
-RUN wget "http://ftp.us.debian.org/debian/pool/main/o/openssl/libssl3_3.1.4-2_amd64.deb" \
+RUN wget "http://ftp.us.debian.org/debian/pool/main/o/openssl/libssl3_3.1.5-1_amd64.deb" \
     && dpkg -i libssl3_3.1.4-2_amd64.deb \
     && rm libssl3_3.1.4-2_amd64.deb
 #USER mssql
